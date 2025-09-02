@@ -1,37 +1,32 @@
 name: Weekly Model Retraining
+
 on:
-schedule:
-- cron: '0 3 * * 1'
-workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
 jobs:
-train-models:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout repository
-uses: actions/checkout@v3
-  - name: Set up Python
-    uses: actions/setup-python@v4
-    with:
-      python-version: 3.9
+  train-models:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  - name: Install Python dependencies
-    run: pip install pandas requests scikit-learn skl2onnx packaging
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
 
-  - name: Run Python training script
-    run: python train_models_automated.py
+      - name: Install Python dependencies
+        run: pip install pandas requests scikit-learn skl2onnx packaging
 
-  - name: Commit new models to repository
-    run: |
-      git config user.name 'github-actions[bot]'
-      git config user.email 'github-actions[bot]@users.noreply.github.com'
-      git add models/
-      git diff --quiet && git diff --staged --quiet || git commit -m "Automated weekly model retraining"
-      git push
+      - name: Run Python training script
+        run: python train_models_automated.py
 
-
-**The only change is on this line:**
-
-
-```yaml
-run: pip install pandas requests scikit-learn skl2onnx packaging
-
+      - name: Commit new models to repository
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add models/
+          git diff --quiet && git diff --staged --quiet || git commit -m "Automated weekly model retraining"
+          git push
