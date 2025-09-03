@@ -98,7 +98,7 @@
         statusText.textContent = `Loading AI model for ${leagueCode}...`;
         // IMPORTANT: This URL should point to your GitHub repo where the models are stored.
         // Replace 'YOUR_USERNAME/YOUR_REPO/main' with your actual repo path.
-        const modelUrl = `https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/models/model_${leagueCode}.onnx`;
+        const modelUrl = `https://raw.githubusercontent.com/foot-predictor-3000/foot-predictor/main/models/model_${leagueCode}.onnx`;
         
         try {
             ortSession = await ort.InferenceSession.create(modelUrl);
