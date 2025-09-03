@@ -8,6 +8,11 @@ on:
 jobs:
   train-models:
     runs-on: ubuntu-latest
+
+    # --- THIS IS THE NEW PERMISSION SLIP ---
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
